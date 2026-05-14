@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="et">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mihkel & Nele — Pulm 2026</title>
+  <meta name="description" content="Mihkel Vaher ja Nele Valgepea pulmad. Liitu meiega sellel erilistel päeval." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════════
+       NAVIGATSIOON
+  ════════════════════════════════════════ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">M & N</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menüü">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#programm">Programm</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
+        <li><a href="#istekohad">Istekohad</a></li>
+        <li><a href="#asukoht">Asukoht</a></li>
+        <li><a href="#majutus">Majutus</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       HERO SECTION
+  ════════════════════════════════════════ -->
+  <section id="hero" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Me abiellume!</p>
+      <h1 class="hero-title">
+        <span class="hero-name">Mihkel Vaher</span>
+        <span class="hero-amp">&</span>
+        <span class="hero-name">Nele Valgepea</span>
+      </h1>
+      <p class="hero-date">Laupäev · 8. august 2026</p>
+      <div class="hero-divider">
+        <span class="divider-line"></span>
+        <span class="divider-icon">✦</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- LOENDUR -->
+      <div class="countdown" id="countdown">
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-days">00</span>
+          <span class="countdown-label">Päeva</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-hours">00</span>
+          <span class="countdown-label">Tundi</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-mins">00</span>
+          <span class="countdown-label">Minutit</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-secs">00</span>
+          <span class="countdown-label">Sekundit</span>
+        </div>
+      </div>
+
+      <a href="#rsvp" class="btn btn-hero">Kinnita osalemine</a>
+    </div>
+    <div class="scroll-hint">
+      <span>Kerige alla</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       PROGRAMM (TIMELINE)
+  ════════════════════════════════════════ -->
+  <section id="programm" class="section section-light">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Kava</p>
+        <h2 class="section-title">Päeva Programm</h2>
+        <p class="section-subtitle">8. august 2026 · Kõik ajad on ligikaudsed</p>
+      </div>
+
+      <div class="timeline">
+
+        <div class="timeline-item" data-aos>
+          <div class="timeline-icon">💍</div>
+          <div class="timeline-card">
+            <div class="timeline-time">13:00</div>
+            <h3 class="timeline-event">Külaliste saabumine</h3>
+            <p class="timeline-desc">Tervitame teid tseremoonia platsil. Teile pakutakse klaas proseccot ja muid jooke.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+          <div class="timeline-icon">💒</div>
+          <div class="timeline-card">
+            <div class="timeline-time">14:00</div>
+            <h3 class="timeline-event">Laulatustseremoonia</h3>
+            <p class="timeline-desc">Mihkel ja Nele ütlevad üksteisele "jah" romantilises õues tseremoonias.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+          <div class="timeline-icon">📸</div>
+          <div class="timeline-card">
+            <div class="timeline-time">15:00</div>
+            <h3 class="timeline-event">Fotosessioon</h3>
+            <p class="timeline-desc">Grupi- ja paari fotod. Külalised saavad nautida vabaõhu aeda ja kokteilijoomine
+              jätkub.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+          <div class="timeline-icon">🥂</div>
+          <div class="timeline-card">
+            <div class="timeline-time">16:30</div>
+            <h3 class="timeline-event">Vastuvõtt algab</h3>
+            <p class="timeline-desc">Tervetulevariimi tants, prosecco toos ja tervitussõnad.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+          <div class="timeline-icon">🍽️</div>
+          <div class="timeline-card">
+            <div class="timeline-time">17:30</div>
+            <h3 class="timeline-event">Õhtusöök</h3>
+            <p class="timeline-desc">Kolmekäiguline gourmet-õhtusöök, vahevein ja abielu mälestuskõned.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+          <div class="timeline-icon">🎂</div>
+          <div class="timeline-card">
+            <div class="timeline-time">20:00</div>
+            <h3 class="timeline-event">Koogi lõikamine</h3>
+            <p class="timeline-desc">Traditsiooniline pulmakoogilõikamine ja meile spetsiaalselt valitud magustoidud.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+          <div class="timeline-icon">💃</div>
+          <div class="timeline-card">
+            <div class="timeline-time">20:30</div>
+            <h3 class="timeline-event">Esimene tants & Svingimine</h3>
+            <p class="timeline-desc">Esimene abielu tants ja seejärel tantsimine uurides. DJ mängib kogu õhtu!</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+          <div class="timeline-icon">🌙</div>
+          <div class="timeline-card">
+            <div class="timeline-time">01:00</div>
+            <h3 class="timeline-event">Hüvastijätt</h3>
+            <p class="timeline-desc">Peolõpp. Soovime kõigile teel olevaid jõude ja head ööd!</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       RSVP
+  ════════════════════════════════════════ -->
+  <section id="rsvp" class="section section-dark">
+    <div class="container">
+      <div class="section-header section-header-light">
+        <p class="section-eyebrow eyebrow-gold">Kinnitus</p>
+        <h2 class="section-title title-light">Kas tulete?</h2>
+        <p class="section-subtitle subtitle-light">Palume vastata hiljemalt <strong>1. juuliks 2026</strong></p>
+      </div>
+
+      <div class="rsvp-wrapper">
+        <!-- Google Form embed — asendage oma Google Formsi lingiga -->
+        <div class="rsvp-embed-container">
+          <iframe id="rsvp-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSe_PLACEHOLDER/viewform?embedded=true"
+            width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0"
+            title="RSVP vorm">Laadin…</iframe>
+          <!-- FALLBACK vorm juhul kui Google Formsi link pole seadistatud -->
+          <div class="rsvp-fallback" id="rsvpFallback">
+            <form class="rsvp-form" id="rsvpForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="rsvp-name">Teie täisnimi *</label>
+                  <input type="text" id="rsvp-name" name="name" placeholder="Eesnimi Perekonnanimi" required />
+                </div>
+                <div class="form-group">
+                  <label for="rsvp-email">E-posti aadress *</label>
+                  <input type="email" id="rsvp-email" name="email" placeholder="teie@email.ee" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="rsvp-attend">Osalemine *</label>
+                  <select id="rsvp-attend" name="attend" required>
+                    <option value="">Valige...</option>
+                    <option value="yes">Jah, tulen!</option>
+                    <option value="yes-plus">Jah, tulen koos kaaslasega</option>
+                    <option value="no">Kahjuks ei saa osaleda</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="rsvp-dietary">Toidupiirangud</label>
+                  <input type="text" id="rsvp-dietary" name="dietary" placeholder="Taimetoiduline, allergia vms." />
+                </div>
+              </div>
+              <div class="form-group form-group-full">
+                <label for="rsvp-message">Sõnum paarile (vabatahtlik)</label>
+                <textarea id="rsvp-message" name="message" rows="4"
+                  placeholder="Kirjutage meile soov või sõnum..."></textarea>
+              </div>
+              <div class="form-submit">
+                <button type="submit" class="btn btn-gold" id="rsvp-submit">Saada kinnitus ✦</button>
+              </div>
+            </form>
+            <div class="rsvp-success" id="rsvpSuccess" style="display:none;">
+              <div class="success-icon">✦</div>
+              <h3>Täname kinnituse eest!</h3>
+              <p>Oleme teie vastuse kätte saanud. Ei jõua ära oodata teiega koos tähistamist!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       ISTEKOHAD
+  ════════════════════════════════════════ -->
+  <section id="istekohad" class="section section-light">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Saaliplaan</p>
+        <h2 class="section-title">Teie Istekoht</h2>
+        <p class="section-subtitle">Leidke oma nimi alloleval plaanil</p>
+      </div>
+
+      <div class="seating-layout">
+        <!-- Istekohade pilt -->
+        <div class="seating-image-wrap">
+          <div class="seating-placeholder">
+            <div class="seating-placeholder-inner">
+              <div class="seating-icon">🗺️</div>
+              <h3>Saaliplaan tuleb peagi</h3>
+              <p>Pärast RSVP tähtaega (1. juuli 2026) lisame siia täieliku istekohade plaani koos nimede ja laudade
+                numbriga.</p>
+              <p class="seating-hint">Asendage allolev pilt oma lauaplaanis:</p>
+              <code class="seating-code">seating-plan.jpg</code>
+            </div>
+          </div>
+          <!-- Asendage see oma päris saaliplaanis: -->
+          <!-- <img src="seating-plan.jpg" alt="Istekohade plaan" class="seating-img" /> -->
+        </div>
+
+        <!-- Otsing -->
+        <div class="seating-search-wrap">
+          <h3 class="seating-search-title">Otsi oma nime</h3>
+          <div class="seating-search-box">
+            <input type="text" id="seatSearch" placeholder="Sisesta oma eesnimi..." oninput="searchSeat()" />
+            <span class="seat-search-icon">🔍</span>
+          </div>
+          <div id="seatResult" class="seat-result"></div>
+
+          <!-- Näidis istekohade andmed — asendage päris andmetega -->
+          <div class="seat-legend">
+            <h4>Laudade legend</h4>
+            <div class="seat-tables">
+              <div class="seat-table-chip">Laud 1 — Perepaar</div>
+              <div class="seat-table-chip">Laud 2 — Perekond</div>
+              <div class="seat-table-chip">Laud 3 — Sõbrad</div>
+              <div class="seat-table-chip">Laud 4 — Kolleegid</div>
+              <div class="seat-table-chip">Laud 5 — Sugulased</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       ASUKOHT
+  ════════════════════════════════════════ -->
+  <section id="asukoht" class="section section-cream">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Leia meid üles</p>
+        <h2 class="section-title">Asukoht</h2>
+        <p class="section-subtitle">Kus meie eriline päev toimub</p>
+      </div>
+
+      <div class="location-wrapper">
+        <div class="location-info">
+          <div class="location-card">
+            <div class="loc-icon">💒</div>
+            <h3>Tseremoonia</h3>
+            <p class="loc-name">Täpsustame hiljem</p>
+            <p class="loc-address">Aadress · Eesti</p>
+            <p class="loc-time">Algus kell 14:00</p>
+            <a href="https://maps.google.com" target="_blank" class="btn btn-outline btn-sm">Ava kaardil →</a>
+          </div>
+          <div class="location-card">
+            <div class="loc-icon">🥂</div>
+            <h3>Vastuvõtt</h3>
+            <p class="loc-name">Täpsustame hiljem</p>
+            <p class="loc-address">Aadress · Eesti</p>
+            <p class="loc-time">Algus kell 16:30</p>
+            <a href="https://maps.google.com" target="_blank" class="btn btn-outline btn-sm">Ava kaardil →</a>
+          </div>
+        </div>
+
+        <div class="location-map">
+          <!-- Asendage laius ja kõrgus ning Google Maps embed koodiga -->
+          <div class="map-placeholder">
+            <div class="map-pin-anim">📍</div>
+            <p>Google Maps kaart lisatakse siia</p>
+            <p class="map-hint">Kleepige Google Maps <em>embed</em> kood HTML-i siia</p>
+          </div>
+          <!--
+          <iframe
+            src="https://www.google.com/maps/embed?pb=TEIE_MAPS_KOOD"
+            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       MAJUTUS
+  ════════════════════════════════════════ -->
+  <section id="majutus" class="section section-light">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Ööbimine</p>
+        <h2 class="section-title">Majutus</h2>
+        <p class="section-subtitle">Soovitused külalistele, kes ööbivad</p>
+      </div>
+
+      <div class="accom-grid">
+
+        <div class="accom-card" data-aos>
+          <div class="accom-badge">Soovitatav</div>
+          <div class="accom-icon">🏨</div>
+          <h3 class="accom-name">Hotell / Pesamaja</h3>
+          <p class="accom-desc">Lisage siia oma eelistatud majutuskoha üksikasjad. Lisage aadress, hinnatase ja
+            broneerimislink.</p>
+          <div class="accom-meta">
+            <span>📍 Aadress</span>
+            <span>💶 Alates XX€ / öö</span>
+          </div>
+          <a href="#" class="btn btn-outline">Broneeri →</a>
+        </div>
+
+        <div class="accom-card" data-aos>
+          <div class="accom-icon">🌿</div>
+          <h3 class="accom-name">Külalistemaja</h3>
+          <p class="accom-desc">Lähim külalistemaja peosaalile. Hubane ja rahustav keskkond pidustuste järgseks
+            puhkuseks.</p>
+          <div class="accom-meta">
+            <span>📍 Aadress</span>
+            <span>💶 Alates XX€ / öö</span>
+          </div>
+          <a href="#" class="btn btn-outline">Broneeri →</a>
+        </div>
+
+        <div class="accom-card" data-aos>
+          <div class="accom-icon">🏡</div>
+          <h3 class="accom-name">Airbnb / Suvila</h3>
+          <p class="accom-desc">Piirkonnas on mitmeid Airbnb võimalusi. Soovitame broneerida varakult, kuna august on
+            kõrghooaeg.</p>
+          <div class="accom-meta">
+            <span>📍 Piirkond</span>
+            <span>💶 Hinnad varieeruvad</span>
+          </div>
+          <a href="https://www.airbnb.com" target="_blank" class="btn btn-outline">Otsi Airbnb-st →</a>
+        </div>
+
+      </div>
+
+      <div class="accom-note">
+        <p>🚌 <strong>Transport:</strong> Kaalume korraldada bussitransporti peosaalist lähimatele majutuskohtadele.
+          Täpsustame RSVP kinnituste järel.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-names">Mihkel & Nele</p>
+      <p class="footer-date">8. august 2026</p>
+      <div class="footer-divider">
+        <span class="divider-line"></span>
+        <span class="divider-icon">✦</span>
+        <span class="divider-line"></span>
+      </div>
+      <p class="footer-love">Tehtud armastusega ✦</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
