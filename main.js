@@ -4,24 +4,28 @@
 
 // ── Navbar scroll effect ──────────────────────────────────
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-}, { passive: true });
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 60) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }, { passive: true });
+}
 
 // ── Mobile nav toggle ─────────────────────────────────────
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-});
-// Close on link click
-navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'));
-});
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+    });
+    // Close on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+}
 
 // ── Shared Utilities ─────────────────────────────────────
 function padTwo(n) {
@@ -64,6 +68,8 @@ const cdEls = {
 };
 
 function updateCountdown() {
+    if (!cdEls.days || !cdEls.hours || !cdEls.mins || !cdEls.secs) return;
+
     const diff = weddingDate - new Date();
 
     if (diff <= 0) {
@@ -95,51 +101,74 @@ const iframe = $('rsvp-iframe');
 const fallback = $('rsvpFallback');
 const PLACEHOLDER_SRC = 'PLACEHOLDER';
 
-if (iframe.src.includes(PLACEHOLDER_SRC) || iframe.src === '') {
+if (iframe && fallback) {
+    if (iframe.src.includes(PLACEHOLDER_SRC) || iframe.src === '') {
+        // No real Google Form URL — show fallback form
+        iframe.style.display = 'none';
+        fallback.style.display = 'block';
+    } else {
+        // Real Google Form URL set — show iframe
+        iframe.style.display = 'block';
+        fallback.style.display = 'none';
+    }
+} else if (iframe) {
     iframe.style.display = 'none';
-    fallback.style.display = 'block';
-} else {
-    iframe.style.display = 'block';
-    fallback.style.display = 'none';
 }
 
 // Local fallback form submission
 const rsvpForm = $('rsvpForm');
 const rsvpSuccess = $('rsvpSuccess');
+const rsvpError = $('rsvpError');
 
 if (rsvpForm) {
     rsvpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = $('rsvp-submit');
+        if (!btn) return;
+
         btn.disabled = true;
         btn.textContent = 'Saadan...';
 
-        const data = {
-            name: $('rsvp-name').value,
-            email: $('rsvp-email').value,
-            attend: $('rsvp-attend').value,
-            dietary: $('rsvp-dietary').value,
-            message: $('rsvp-message').value,
-            timestamp: new Date().toISOString()
-        };
+        // Hide any previous error message
+        if (rsvpError) rsvpError.style.display = 'none';
 
-        // ── Google Forms auto-submit option ──────────────────
-        // If you want to use Google Forms without iframe,
-        // find your form's action URL and field names, then:
-        // const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
-        // const formData = new FormData();
-        // formData.append('entry.XXXXXXX', data.name);   // replace with real entry IDs
-        // formData.append('entry.YYYYYYY', data.email);
-        // fetch(GOOGLE_FORM_ACTION, { method: 'POST', mode: 'no-cors', body: formData });
+        try {
+            const nameEl = $('rsvp-name');
+            const emailEl = $('rsvp-email');
+            const attendEl = $('rsvp-attend');
+            const dietaryEl = $('rsvp-dietary');
+            const messageEl = $('rsvp-message');
 
-        // Simulate success (replace above with real integration)
-        await new Promise(r => setTimeout(r, 900));
+            if (!nameEl || !emailEl || !attendEl) {
+                throw new Error('Vormi väljad puuduvad. Palun laadige leht uuesti.');
+            }
 
-        rsvpForm.style.display = 'none';
-        rsvpSuccess.style.display = 'block';
-        rsvpSuccess.style.animation = 'fadeInUp 0.6s ease both';
+            const data = {
+                name: nameEl.value,
+                email: emailEl.value,
+                attend: attendEl.value,
+                dietary: dietaryEl ? dietaryEl.value : '',
+                message: messageEl ? messageEl.value : '',
+                timestamp: new Date().toISOString()
+            };
 
+            rsvpForm.style.display = 'none';
+            if (rsvpSuccess) {
+                rsvpSuccess.style.display = 'block';
+                rsvpSuccess.style.animation = 'fadeInUp 0.6s ease both';
+            }
 
+            // Log data to console (for testing / Netlify Forms etc.)
+            console.log('RSVP kinnitus:', data);
+        } catch (error) {
+            console.error('RSVP vormi viga:', error);
+            btn.disabled = false;
+            btn.textContent = 'Saada kinnitus ✦';
+            if (rsvpError) {
+                rsvpError.textContent = error.message || 'Midagi läks valesti. Palun proovige uuesti.';
+                rsvpError.style.display = 'block';
+            }
+        }
     });
 }
 
@@ -155,8 +184,12 @@ const guestData = [
 ];
 
 function searchSeat() {
-    const query = $('seatSearch').value.trim().toLowerCase();
+    const searchEl = $('seatSearch');
     const result = $('seatResult');
+
+    if (!searchEl || !result) return;
+
+    const query = searchEl.value.trim().toLowerCase();
 
     if (query.length < 2) {
         result.textContent = '';
@@ -183,7 +216,10 @@ function searchSeat() {
 }
 
 // Attach event listener programmatically (CSP-compatible, no inline handler)
-document.getElementById('seatSearch').addEventListener('input', searchSeat);
+const seatSearchInput = $('seatSearch');
+if (seatSearchInput) {
+    seatSearchInput.addEventListener('input', searchSeat);
+}
 
 // ── Smooth active nav link highlighting ──────────────────
 const navHighlightLinks = document.querySelectorAll('.nav-links a');

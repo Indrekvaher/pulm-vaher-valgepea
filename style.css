@@ -658,6 +658,17 @@ a {
   margin-top: 8px;
 }
 
+.rsvp-error {
+  background: rgba(192, 57, 43, 0.15);
+  border: 1px solid rgba(192, 57, 43, 0.4);
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  color: #e74c3c;
+  text-align: center;
+}
+
 .rsvp-success {
   text-align: center;
   padding: 40px 20px;
