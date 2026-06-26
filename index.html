@@ -15,6 +15,10 @@
     rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://docs.google.com; connect-src 'self'" />
 </head>
 
 <body>
@@ -277,7 +281,7 @@
         <div class="seating-search-wrap">
           <h3 class="seating-search-title">Otsi oma nime</h3>
           <div class="seating-search-box">
-            <input type="text" id="seatSearch" placeholder="Sisesta oma eesnimi..." oninput="searchSeat()" />
+            <input type="text" id="seatSearch" placeholder="Sisesta oma eesnimi..." />
             <span class="seat-search-icon">🔍</span>
           </div>
           <div id="seatResult" class="seat-result"></div>

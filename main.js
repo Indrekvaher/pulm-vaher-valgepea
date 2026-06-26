@@ -132,8 +132,7 @@ if (rsvpForm) {
         rsvpSuccess.style.display = 'block';
         rsvpSuccess.style.animation = 'fadeInUp 0.6s ease both';
 
-        // Log data to console (for testing / Netlify Forms etc.)
-        console.log('RSVP kinnitus:', data);
+
     });
 }
 
@@ -161,7 +160,14 @@ function searchSeat() {
     const match = guestData.find(g => g.name.toLowerCase().includes(query));
 
     if (match) {
-        result.innerHTML = `✦ <strong>${match.name}</strong> — ${match.info}`;
+        result.textContent = '';
+        const symbol = document.createTextNode('✦ ');
+        const strong = document.createElement('strong');
+        strong.textContent = match.name;
+        const info = document.createTextNode(' — ' + match.info);
+        result.appendChild(symbol);
+        result.appendChild(strong);
+        result.appendChild(info);
         result.className = 'seat-result found';
     } else {
         result.textContent = 'Nime ei leitud. Kontrollige kirjaviisi või võtke meiega ühendust.';
@@ -169,8 +175,8 @@ function searchSeat() {
     }
 }
 
-// Expose to global for inline oninput handler
-window.searchSeat = searchSeat;
+// Attach event listener programmatically (CSP-compatible, no inline handler)
+document.getElementById('seatSearch').addEventListener('input', searchSeat);
 
 // ── Smooth active nav link highlighting ──────────────────
 const sections = document.querySelectorAll('section[id]');
