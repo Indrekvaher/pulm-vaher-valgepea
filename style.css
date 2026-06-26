@@ -118,6 +118,42 @@ a {
   font-size: 0.72rem;
 }
 
+/* ── Shared Card ──────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border: 1px solid #ede5d9;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+/* ── Shared Eyebrow ──────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+}
+
+/* ── Scroll-Reveal Animation ────────────────────────────── */
+.will-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.will-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ── Divider ──────────────────────────────────────────────── */
 .hero-divider,
 .footer-divider {
@@ -260,12 +296,8 @@ a {
 }
 
 .hero-eyebrow {
-  font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
   margin-bottom: 20px;
 }
 
@@ -416,14 +448,8 @@ a {
 .section-header-light {}
 
 .section-eyebrow {
-  font-family: var(--font-sans);
   font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
   margin-bottom: 12px;
-  display: block;
 }
 
 .eyebrow-gold {
@@ -480,17 +506,6 @@ a {
   gap: 0;
   margin-bottom: 48px;
   position: relative;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.timeline-item.will-animate {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.timeline-item.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .timeline-item:nth-child(odd) {
@@ -520,17 +535,7 @@ a {
 
 .timeline-card {
   width: calc(50% - 40px);
-  background: var(--white);
-  border: 1px solid #f0e8dc;
-  border-radius: var(--radius);
   padding: 24px 28px;
-  box-shadow: var(--shadow);
-  transition: box-shadow var(--transition), transform var(--transition);
-}
-
-.timeline-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
 }
 
 .timeline-item:nth-child(odd) .timeline-card {
@@ -850,17 +855,7 @@ code.seating-code {
 }
 
 .location-card {
-  background: var(--white);
-  border: 1px solid #ede5d9;
-  border-radius: var(--radius);
   padding: 32px;
-  box-shadow: var(--shadow);
-  transition: box-shadow var(--transition), transform var(--transition);
-}
-
-.location-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
 }
 
 .loc-icon {
@@ -952,29 +947,9 @@ code.seating-code {
 }
 
 .accom-card {
-  background: var(--white);
-  border: 1px solid #ede5d9;
-  border-radius: var(--radius);
   padding: 36px 28px;
   text-align: center;
-  box-shadow: var(--shadow);
   position: relative;
-  transition: box-shadow var(--transition), transform var(--transition), opacity 0.6s ease;
-}
-
-.accom-card.will-animate {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.accom-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.accom-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
 }
 
 .accom-badge {

@@ -23,96 +23,103 @@ navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => navLinks.classList.remove('open'));
 });
 
-// ── Countdown Timer ───────────────────────────────────────
-// Wedding date: 8 August 2026 at 14:00 EET (UTC+3)
-const weddingDate = new Date('2026-08-08T14:00:00+03:00');
-
+// ── Shared Utilities ─────────────────────────────────────
 function padTwo(n) {
     return String(n).padStart(2, '0');
 }
 
+function $(id) {
+    return document.getElementById(id);
+}
+
+function createScrollObserver(selector, { threshold = 0.12, staggerDelay = 0 } = {}) {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(el => el.classList.add('will-animate'));
+
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const delay = parseInt(entry.target.dataset.delay || 0);
+                setTimeout(() => entry.target.classList.add('visible'), delay);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold });
+
+    elements.forEach((el, i) => {
+        if (staggerDelay) el.dataset.delay = i * staggerDelay;
+        obs.observe(el);
+    });
+
+    return obs;
+}
+
+// ── Countdown Timer ───────────────────────────────────────
+const weddingDate = new Date('2026-08-08T14:00:00+03:00');
+const cdEls = {
+    days: $('cd-days'),
+    hours: $('cd-hours'),
+    mins: $('cd-mins'),
+    secs: $('cd-secs'),
+};
+
 function updateCountdown() {
-    const now = new Date();
-    const diff = weddingDate - now;
+    const diff = weddingDate - new Date();
 
     if (diff <= 0) {
-        document.getElementById('cd-days').textContent = '00';
-        document.getElementById('cd-hours').textContent = '00';
-        document.getElementById('cd-mins').textContent = '00';
-        document.getElementById('cd-secs').textContent = '00';
+        cdEls.days.textContent = '00';
+        cdEls.hours.textContent = '00';
+        cdEls.mins.textContent = '00';
+        cdEls.secs.textContent = '00';
         return;
     }
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+    const MS_HOUR = 1000 * 60 * 60;
+    const MS_DAY = MS_HOUR * 24;
 
-    document.getElementById('cd-days').textContent = padTwo(days);
-    document.getElementById('cd-hours').textContent = padTwo(hours);
-    document.getElementById('cd-mins').textContent = padTwo(mins);
-    document.getElementById('cd-secs').textContent = padTwo(secs);
+    cdEls.days.textContent = padTwo(Math.floor(diff / MS_DAY));
+    cdEls.hours.textContent = padTwo(Math.floor((diff % MS_DAY) / MS_HOUR));
+    cdEls.mins.textContent = padTwo(Math.floor((diff % MS_HOUR) / (1000 * 60)));
+    cdEls.secs.textContent = padTwo(Math.floor((diff % (1000 * 60)) / 1000));
 }
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
 // ── Scroll Animation (IntersectionObserver) ───────────────
-const animatables = document.querySelectorAll('.timeline-item, .accom-card');
-
-// Add will-animate so CSS hides them only when JS is active
-animatables.forEach(el => el.classList.add('will-animate'));
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            const delay = parseInt(entry.target.dataset.delay || 0);
-            setTimeout(() => {
-                entry.target.classList.add('visible');
-            }, delay);
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.12 });
-
-animatables.forEach((el, i) => {
-    el.dataset.delay = i * 80;
-    observer.observe(el);
-});
+createScrollObserver('.timeline-item, .accom-card', { staggerDelay: 80 });
 
 // ── RSVP Form handling ────────────────────────────────────
 // Check if Google Form iframe loads (has real URL) or fall back to local form
-const iframe = document.getElementById('rsvp-iframe');
-const fallback = document.getElementById('rsvpFallback');
+const iframe = $('rsvp-iframe');
+const fallback = $('rsvpFallback');
 const PLACEHOLDER_SRC = 'PLACEHOLDER';
 
 if (iframe.src.includes(PLACEHOLDER_SRC) || iframe.src === '') {
-    // No real Google Form URL — show fallback form
     iframe.style.display = 'none';
     fallback.style.display = 'block';
 } else {
-    // Real Google Form URL set — show iframe
     iframe.style.display = 'block';
     fallback.style.display = 'none';
 }
 
 // Local fallback form submission
-const rsvpForm = document.getElementById('rsvpForm');
-const rsvpSuccess = document.getElementById('rsvpSuccess');
+const rsvpForm = $('rsvpForm');
+const rsvpSuccess = $('rsvpSuccess');
 
 if (rsvpForm) {
     rsvpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const btn = document.getElementById('rsvp-submit');
+        const btn = $('rsvp-submit');
         btn.disabled = true;
         btn.textContent = 'Saadan...';
 
         const data = {
-            name: document.getElementById('rsvp-name').value,
-            email: document.getElementById('rsvp-email').value,
-            attend: document.getElementById('rsvp-attend').value,
-            dietary: document.getElementById('rsvp-dietary').value,
-            message: document.getElementById('rsvp-message').value,
+            name: $('rsvp-name').value,
+            email: $('rsvp-email').value,
+            attend: $('rsvp-attend').value,
+            dietary: $('rsvp-dietary').value,
+            message: $('rsvp-message').value,
             timestamp: new Date().toISOString()
         };
 
@@ -148,8 +155,8 @@ const guestData = [
 ];
 
 function searchSeat() {
-    const query = document.getElementById('seatSearch').value.trim().toLowerCase();
-    const result = document.getElementById('seatResult');
+    const query = $('seatSearch').value.trim().toLowerCase();
+    const result = $('seatResult');
 
     if (query.length < 2) {
         result.textContent = '';
@@ -179,13 +186,13 @@ function searchSeat() {
 document.getElementById('seatSearch').addEventListener('input', searchSeat);
 
 // ── Smooth active nav link highlighting ──────────────────
-const sections = document.querySelectorAll('section[id]');
+const navHighlightLinks = document.querySelectorAll('.nav-links a');
 
 const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const id = entry.target.getAttribute('id');
-            document.querySelectorAll('.nav-links a').forEach(a => {
+            navHighlightLinks.forEach(a => {
                 a.style.color = a.getAttribute('href') === `#${id}`
                     ? 'var(--gold)'
                     : 'rgba(255,255,255,0.85)';
@@ -194,4 +201,4 @@ const navObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.4 });
 
-sections.forEach(s => navObserver.observe(s));
+document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
